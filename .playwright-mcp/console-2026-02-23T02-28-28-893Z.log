@@ -1,0 +1,2 @@
+[    2900ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://eejkgpapbllthjjbphpp.supabase.co/auth/v1/authorize?provider=google&redirect_to=http%3A%2F%2Flocalhost%3A3099%2Fapi%2Fauth%2Fcallback&code_challenge=n2QIeQhyGR4AyfL2JIRFr6bORGruXortp20vwhK3C7Y&code_challenge_method=s256:0
+[    2936ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://eejkgpapbllthjjbphpp.supabase.co/favicon.ico:0
