@@ -138,33 +138,21 @@ export default function LoginPage() {
 
     setLoading("mock")
 
-    try {
-      const response = await fetch("/api/mock-login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: form.email.trim(),
-          // password is optional — the API defaults to 'password123'
-          password: form.password || undefined,
-        }),
-      })
+    const { error } = await supabase.auth.signInWithPassword({
+      email: form.email.trim(),
+      password: form.password || "password123",
+    })
 
-      const data = (await response.json()) as { error?: string }
-
-      if (!response.ok) {
-        setMockError(data.error ?? "로그인에 실패했습니다.")
-        setLoading(null)
-        return
-      }
-
-      // Successful login — redirect to the main dashboard.
-      // window.location.href triggers a full page navigation which ensures
-      // Next.js picks up the newly set Supabase auth cookies.
-      window.location.href = "/dashboard"
-    } catch {
-      setMockError("서버와 통신하는 중 오류가 발생했습니다.")
+    if (error) {
+      setMockError(error.message)
       setLoading(null)
+      return
     }
+
+    // Successful login — redirect to the main dashboard.
+    // window.location.href triggers a full page navigation which ensures
+    // Next.js picks up the newly set Supabase auth cookies.
+    window.location.href = "/dashboard"
   }
 
   // -- Render ----------------------------------------------------------------
